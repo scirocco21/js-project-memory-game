@@ -1,3 +1,17 @@
+
+// const cardTypes = ["paper-plane-o", "diamond", "anchor", "bolt", "cube", "leaf", "bicycle", "bomb"];
+
+function setGame() {
+  let cardList = document.querySelectorAll("li.card");
+  let shuffledDeck = shuffle(Array.from(cardList));
+
+  for (let i = 0; i < cardList.length; i++) {
+    cardList[i].querySelector("i").className = shuffledDeck[i].querySelector("i").className
+    cardList[i].className = "card"
+  }
+  console.log(cardList)
+}
+
 /*
  * Create a list that holds all of your cards
  */
