@@ -46,6 +46,25 @@ function handleMatch() {
   // lock two open cards that match
 }
 
+function updateScore() {
+  let scores = document.querySelectorAll("ul.stars li i")
+  if (scores.length === 3 && moves > 10) {
+    document.querySelector(".stars").lastChild.remove();
+  } else if (scores.length === 2 && moves > 15) {
+    document.querySelector(".stars").lastChild.remove();
+  } else if (scores.length === 1 && moves > 20) {
+    document.querySelector(".stars").lastChild.remove();
+  }
+}
+
+function gameOver() {
+  return matches.length === 16 ? true : false;
+}
+
+function congratulate() {
+  alert("Woohoo! You did it!")
+}
+
 function clickHandler() {
   addCard(this);
   this.classList.add("open", "show");
@@ -70,8 +89,12 @@ function clickHandler() {
     }
     moves += 1;
     moveCounter.textContent = moves
+    updateScore();
 
-    // check if game is over
+    if (gameOver()) {
+      congratulate();
+      setGame();
+    }// check if game is over
   }
 
 
