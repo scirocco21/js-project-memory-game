@@ -7,12 +7,12 @@ let moves;
 
 function setGame() {
   let cardList = document.querySelectorAll("li.card");
-  let shuffledCards = shuffle(Array.from(cardList))
+  let shuffledCards = shuffle(Array.from(cardList));
   document.querySelector("ul.deck").innerHTML = ""
   for (let i = 0; i < shuffledCards.length; i++) {
-    document.querySelector("ul.deck").appendChild(shuffledCards[i])
-    cardList[i].className = "card"
-    cardList[i].addEventListener("click", clickHandler)
+    document.querySelector("ul.deck").appendChild(shuffledCards[i]);
+    cardList[i].className = "card";
+    cardList[i].addEventListener("click", clickHandler);
   }
   moves = 0;
   matches = []
@@ -50,21 +50,15 @@ function handleMatch() {
 
 function updateScore() {
   let scores = document.querySelectorAll("ul.stars li i")
-  if (scores.length === 3 && moves > 10) {
+  if (scores.length === 3 && moves > 12) {
     document.querySelector(".stars").lastChild.remove();
-  } else if (scores.length === 2 && moves > 15) {
-    document.querySelector(".stars").lastChild.remove();
-  } else if (scores.length === 1 && moves > 20) {
+  } else if (scores.length === 2 && moves > 16) {
     document.querySelector(".stars").lastChild.remove();
   }
 }
 
 function gameOver() {
   return matches.length === 16 ? true : false;
-}
-
-function congratulate() {
-  alert("Woohoo! You did it!")
 }
 
 function clickHandler() {
@@ -94,8 +88,7 @@ function clickHandler() {
     updateScore();
 
     if (gameOver()) {
-      setTimeout(congratulate, 1000)
-      setTimeout(setGame, 1000);
+      setTimeout(openModal, 1000)
     }// check if game is over
   }
 
@@ -112,3 +105,35 @@ function clickHandler() {
    */
 
 }
+
+let modal = document.getElementById("simpleModal");
+let againBtn = document.getElementById("repeat");
+let closeBtn = document.getElementById("closeBtn");
+let restartBtn = document.querySelector("div.restart");
+
+againBtn.addEventListener('click', function(){
+  setGame();
+  closeModal();
+});
+restartBtn.addEventListener('click', setGame);
+closeBtn.addEventListener('click', closeModal);
+
+function openModal() {
+  let message = document.getElementById("message");
+  let scores = document.querySelectorAll("ul.stars li i")
+  message.append(`<p>Your score was ${scores.length}</p>`)
+  modal.style.display = "block";
+}
+
+function closeModal() {
+  modal.style.display = "none";
+}
+
+
+function clickOutside(e) {
+  if (e.target == modal) {
+    modal.style.display = "none"
+  }
+}
+
+window.addEventListener("click", clickOutside)

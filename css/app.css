@@ -110,3 +110,56 @@ h1 {
     float: right;
     cursor: pointer;
 }
+
+/* modal styles */
+button#repeat {
+  background: #02ccba;
+  color: white;
+  display: block;
+  margin: auto;
+  height: 60px;
+  width: 120px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+button#repeat:hover {
+  background: #02b3e4;
+}
+
+.modal {
+  display:none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0, 0.7)
+}
+
+.modal-content {
+  background-color: white;
+  margin: 20% auto;
+  width: 70%;
+  padding: 10%;
+  box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2), 0 7px 20px 0 rgba(0,0,0,0.2);
+}
+
+span#closeBtn {
+  color: #A9A9A9;
+  float: right;
+  font-size: 24px;
+  padding: 10px;
+}
+
+#closeBtn:hover, .closeBtn:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+p#message {
+  text-align: center;
+}
