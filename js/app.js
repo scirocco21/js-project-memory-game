@@ -1,6 +1,7 @@
 
 // const cardTypes = ["paper-plane-o", "diamond", "anchor", "bolt", "cube", "leaf", "bicycle", "bomb"];
 let moveCounter = document.querySelector("span.moves")
+let scores;
 let openCards = [];
 let matches = [];
 let moves;
@@ -14,6 +15,7 @@ function setGame() {
     cardList[i].className = "card";
     cardList[i].addEventListener("click", clickHandler);
   }
+  scores = 3;
   moves = 0;
   matches = []
 
@@ -49,11 +51,20 @@ function handleMatch() {
 }
 
 function updateScore() {
-  let scores = document.querySelectorAll("ul.stars li i")
-  if (scores.length === 3 && moves > 12) {
-    document.querySelector(".stars").lastChild.remove();
-  } else if (scores.length === 2 && moves > 16) {
-    document.querySelector(".stars").lastChild.remove();
+  if (scores === 3 && moves > 12) {
+    scores -= 1
+    let starList = document.querySelector("ul.stars")
+    starList.removeChild(starList.children[0]);
+    let node = document.createElement("li")
+    node.className = "fa fa-star-o";
+    document.querySelector(".stars").appendChild(node);
+  } else if (scores === 2 && moves > 16) {
+    scores -= 1
+    let starList = document.querySelector("ul.stars")
+    starList.removeChild(starList.children[0]);
+    let node = document.createElement("li")
+    node.className = "fa fa-star-o";
+    document.querySelector("ul.stars").appendChild(node);
   }
 }
 
