@@ -1,6 +1,5 @@
 
 // const cardTypes = ["paper-plane-o", "diamond", "anchor", "bolt", "cube", "leaf", "bicycle", "bomb"];
-let cardList = document.querySelectorAll("li.card");
 let moveCounter = document.querySelector("span.moves")
 let openCards = [];
 let matches = [];
@@ -8,13 +7,16 @@ let moves;
 
 function setGame() {
   let cardList = document.querySelectorAll("li.card");
-  let shuffledDeck = shuffle(Array.from(cardList));
-  for (let i = 0; i < cardList.length; i++) {
-    cardList[i].querySelector("i").className = shuffledDeck[i].querySelector("i").className
+  let shuffledCards = shuffle(Array.from(cardList))
+  document.querySelector("ul.deck").innerHTML = ""
+  for (let i = 0; i < shuffledCards.length; i++) {
+    document.querySelector("ul.deck").appendChild(shuffledCards[i])
     cardList[i].className = "card"
     cardList[i].addEventListener("click", clickHandler)
   }
   moves = 0;
+  matches = []
+
   moveCounter.textContent = moves
 }
 
@@ -92,8 +94,8 @@ function clickHandler() {
     updateScore();
 
     if (gameOver()) {
-      congratulate();
-      setGame();
+      setTimeout(congratulate, 1000)
+      setTimeout(setGame, 1000);
     }// check if game is over
   }
 
