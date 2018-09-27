@@ -75,6 +75,7 @@ function gameOver() {
 function clickHandler() {
   addCard(this);
   this.classList.add("open", "show");
+  this.removeEventListener("click", clickHandler);
   let icon = this.querySelector("i")
 
   if (hasPriorCard()) {
@@ -93,6 +94,8 @@ function clickHandler() {
       setTimeout(function() {previousCard.classList.remove("open", "show")}, 1000)
       let card = this
       setTimeout(function() {card.classList.remove("open", "show")}, 1000)
+      card.addEventListener("click", clickHandler)
+      previousCard.addEventListener("click", clickHandler)
     }
     moves += 1;
     moveCounter.textContent = moves
@@ -139,7 +142,6 @@ function openModal() {
 function closeModal() {
   modal.style.display = "none";
 }
-
 
 function clickOutside(e) {
   if (e.target == modal) {
