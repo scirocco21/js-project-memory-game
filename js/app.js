@@ -150,3 +150,20 @@ function clickOutside(e) {
 }
 
 window.addEventListener("click", clickOutside)
+
+
+// game timer
+
+function changeValue() {
+  document.getElementById("demo").innerHTML = ++value;
+}
+
+var timerInterval = null;
+function start() {
+  stop(); // stoping the previous counting (if any)
+  value = 0;
+  timerInterval = setInterval(changeValue, 1000);
+}
+var stop = function() {
+  clearInterval(timerInterval);
+}
