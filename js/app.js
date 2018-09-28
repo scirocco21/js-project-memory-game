@@ -3,6 +3,7 @@ let stars = document.querySelector("ul.stars").innerHTML
 let scores, matches, moves;
 let openCards = [];
 
+// set starting values for each game
 function initializeValues() {
   matches = []
   scores = 3;
@@ -12,6 +13,7 @@ function initializeValues() {
   document.querySelector("ul.stars").innerHTML = stars;
 }
 
+// set up game for playing: shuffle cards and initialize values
 function setGame() {
   let cardList = document.querySelectorAll("li.card");
   let shuffledCards = shuffle(Array.from(cardList));
@@ -36,6 +38,7 @@ function shuffle(array) {
   return array;
 }
 
+// helper functions for the main game loop
 function openCard(card) {
   openCards.push(card)
   card.classList.add("open", "show");
@@ -46,10 +49,12 @@ function removeCards() {
   openCards = []
 }
 
+// determine whether two cards are a match
 function isMatch(card1, card2) {
   return card1.querySelector("i").className === card2.querySelector("i").className ? true : false
 }
 
+// if so, change their styling and remove event listener
 function handleMatch(card1, card2) {
   card1.classList.add("match")
   card2.classList.add("match")
@@ -58,6 +63,7 @@ function handleMatch(card1, card2) {
   matches.push(card1, card2)
 }
 
+// otherwise flip them after a short interval and restore listeners
 function handleMismatch(card1, card2) {
   setTimeout(function() {card1.classList.remove("open", "show")}, 1000)
   setTimeout(function() {card2.classList.remove("open", "show")}, 1000)
@@ -65,7 +71,8 @@ function handleMismatch(card1, card2) {
   card2.addEventListener("click", clickHandler)
 }
 
-function displayStars() {
+// helper function that updates star display based on moves score
+function updateStars() {
   let starList = document.querySelector("ul.stars")
   starList.removeChild(starList.children[0]);
   let node = document.createElement("li")
@@ -83,7 +90,7 @@ function updateScore() {
     displayStars()
   } else if (scores === 2 && moves > 16) {
     scores -= 1
-    displayStars()
+    updateStars()
   }
 }
 
@@ -91,6 +98,7 @@ function gameOver() {
   return matches.length === 16 ? true : false;
 }
 
+// main game play
 function clickHandler() {
   if (moves === 0) {
     start()
@@ -99,7 +107,6 @@ function clickHandler() {
     openCard(this);
   } else if (openCards.length === 1){
     openCard(this);
-
     let previousCard = openCards[0];
     if (isMatch(this, previousCard)) {
       handleMatch(this, previousCard)
@@ -110,14 +117,12 @@ function clickHandler() {
     updateScore();
     setTimeout(removeCards, 650)
   }
-
   if (gameOver()) {
     stop()
     setTimeout(openModal, 1000)
   }
 }
-
-let modal = document.getElementById("simpleModal");
+// button handlers
 let againBtn = document.getElementById("repeat");
 let closeBtn = document.getElementById("closeBtn");
 let restartBtn = document.querySelector("div.restart");
@@ -134,6 +139,7 @@ restartBtn.addEventListener('click', function(){
 
 closeBtn.addEventListener('click', closeModal);
 
+// enable modal at the end of each game
 function openModal() {
   let summary = document.getElementById("summary");
   let seconds = document.getElementById("sec");
