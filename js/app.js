@@ -133,9 +133,10 @@ restartBtn.addEventListener('click', function(){
 closeBtn.addEventListener('click', closeModal);
 
 function openModal() {
-  let message = document.getElementById("message");
+  let summary = document.getElementById("summary");
+  let seconds = document.getElementById("sec");
   let scores = document.querySelectorAll("ul.stars li i")
-  message.append(`<p>Your score was ${scores.length}</p>`)
+  summary.innerHTML = `Your score was ${scores.length} and you took ${seconds.textContent} seconds`;
   modal.style.display = "block";
 }
 
