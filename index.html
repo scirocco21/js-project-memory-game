@@ -16,18 +16,26 @@
         </header>
 
         <section class="score-panel">
-        	<ul class="stars">
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
-        	</ul>
+          <div class="scores">
+            <ul class="stars">
+        		  <li><i class="fa fa-star"></i></li>
+        		  <li><i class="fa fa-star"></i></li>
+        		  <li><i class="fa fa-star"></i></li>
+        	  </ul>
+          </div>
 
-        	<span class="moves">3</span> Moves
+          <div class="move-counter">
+          	<span id="moves">3</span> Moves
+          </div>
+
+          <div class="time-keeper">
+            Time elapsed: <span id="sec">0</span>s
+          </div>
 
           <div class="restart">
         		<i class="fa fa-repeat"></i>
         	</div>
-        </section>
+      </section>
 
         <ul class="deck">
             <li class="card">
@@ -84,7 +92,8 @@
     <div id="simpleModal" class="modal">
       <div class="modal-content">
         <span id="closeBtn">&times;</span>
-          <p id="message">Woohoo! You did it!</p>
+          <h1 id="message">Woohoo! You did it!</h1>
+          <p id="summary"></p>
           <button id="repeat">Play Again</button>
       </div>
     </div>
