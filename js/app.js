@@ -1,9 +1,7 @@
 let moveCounter = document.getElementById("moves")
 let stars = document.querySelector("ul.stars").innerHTML
-let scores;
+let scores, matches, moves;
 let openCards = [];
-let matches;
-let moves;
 
 function initializeValues() {
   matches = []
@@ -74,6 +72,11 @@ function displayStars() {
   node.className = "fa fa-star-o";
 }
 
+function updateMoves() {
+  moves += 1;
+  moveCounter.textContent = moves
+}
+
 function updateScore() {
   if (scores === 3 && moves > 12) {
     scores -= 1
@@ -103,8 +106,7 @@ function clickHandler() {
     } else {
       handleMismatch(this, previousCard)
     }
-    moves += 1;
-    moveCounter.textContent = moves
+    updateMoves();
     updateScore();
     setTimeout(removeCards, 650)
   }
