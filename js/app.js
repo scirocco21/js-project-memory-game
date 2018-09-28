@@ -1,6 +1,6 @@
 
 // const cardTypes = ["paper-plane-o", "diamond", "anchor", "bolt", "cube", "leaf", "bicycle", "bomb"];
-let moveCounter = document.querySelector("span.moves")
+let moveCounter = document.querySelector("div.move-counter")
 let scores;
 let openCards = [];
 let matches = [];
@@ -17,6 +17,7 @@ function setGame() {
   }
   scores = 3;
   moves = 0;
+  document.getElementById("timer").innerHTML = 0;
   matches = []
 
   moveCounter.textContent = moves
@@ -73,6 +74,9 @@ function gameOver() {
 }
 
 function clickHandler() {
+  if (moves === 0) {
+    start()
+  }
   addCard(this);
   this.classList.add("open", "show");
   this.removeEventListener("click", clickHandler);
@@ -102,6 +106,7 @@ function clickHandler() {
     updateScore();
 
     if (gameOver()) {
+      stop()
       setTimeout(openModal, 1000)
     }// check if game is over
   }
@@ -129,7 +134,12 @@ againBtn.addEventListener('click', function(){
   setGame();
   closeModal();
 });
-restartBtn.addEventListener('click', setGame);
+
+restartBtn.addEventListener('click', function(){
+  stop();
+  setGame();
+});
+
 closeBtn.addEventListener('click', closeModal);
 
 function openModal() {
@@ -154,16 +164,21 @@ window.addEventListener("click", clickOutside)
 
 // game timer
 
-function changeValue() {
-  document.getElementById("demo").innerHTML = ++value;
-}
 
-var timerInterval = null;
+let timerInterval = null;
+
 function start() {
+  let value = 0;
   stop(); // stoping the previous counting (if any)
-  value = 0;
   timerInterval = setInterval(changeValue, 1000);
+
+  function changeValue() {
+    console.log("I've been fired");
+    console.log(value);
+    document.getElementById("timer").innerHTML = ++value;
+  }
+
 }
-var stop = function() {
+let stop = function() {
   clearInterval(timerInterval);
 }
