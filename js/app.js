@@ -1,4 +1,5 @@
 let moveCounter = document.getElementById("moves")
+let stars = document.querySelector("ul.stars").innerHTML
 let scores;
 let openCards = [];
 let matches = [];
@@ -17,7 +18,8 @@ function setGame() {
   scores = 3;
   moves = 0;
   moveCounter.textContent = moves
-  document.getElementById("sec").innerHTML = 00;
+  document.getElementById("sec").innerHTML = 0;
+  document.querySelector("ul.stars").innerHTML = stars;
 }
 
 function shuffle(array) {
@@ -32,16 +34,23 @@ function shuffle(array) {
   return array;
 }
 
-function addCard(card) {
+function openCard(card) {
   openCards.push(card)
+  card.classList.add("open", "show");
+  card.removeEventListener("click", clickHandler);
 }
 
 function removeCards() {
-  openCards.splice(-2,2)
+  openCards = []
 }
 
 function hasPriorCard() {
   return openCards.length > 1 ? true : false
+}
+
+function isMatch(card1, card2) {
+  return card1.querySelector("i").className === card2.querySelector("i").className ? true : false
+
 }
 
 function handleMatch(card1, card2) {
@@ -49,12 +58,10 @@ function handleMatch(card1, card2) {
   card2.classList.add("match")
   card1.removeEventListener("click", clickHandler)
   card2.removeEventListener("click", clickHandler)
-  removeCards();
   matches.push(card1, card2)
 }
 
 function handleMismatch(card1, card2) {
-  removeCards();
   setTimeout(function() {card1.classList.remove("open", "show")}, 1000)
   setTimeout(function() {card2.classList.remove("open", "show")}, 1000)
   card1.addEventListener("click", clickHandler)
@@ -87,14 +94,13 @@ function clickHandler() {
   if (moves === 0) {
     start()
   }
-  addCard(this);
-  this.classList.add("open", "show");
-  this.removeEventListener("click", clickHandler);
-  let icon = this.querySelector("i")
+  if (openCards.length === 0) {
+    openCard(this);
+  } else if (openCards.length === 1){
+    openCard(this);
 
-  if (hasPriorCard()) {
-    let previousCard = openCards[openCards.length - 2];
-    if (previousCard.querySelector("i").className === icon.className) {
+    let previousCard = openCards[0];
+    if (isMatch(this, previousCard)) {
       handleMatch(this, previousCard)
     } else {
       handleMismatch(this, previousCard)
@@ -102,11 +108,12 @@ function clickHandler() {
     moves += 1;
     moveCounter.textContent = moves
     updateScore();
+    setTimeout(removeCards, 650)
+  }
 
-    if (gameOver()) {
-      stop()
-      setTimeout(openModal, 1000)
-    }
+  if (gameOver()) {
+    stop()
+    setTimeout(openModal, 1000)
   }
 }
 
