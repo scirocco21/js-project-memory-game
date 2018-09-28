@@ -2,8 +2,17 @@ let moveCounter = document.getElementById("moves")
 let stars = document.querySelector("ul.stars").innerHTML
 let scores;
 let openCards = [];
-let matches = [];
+let matches;
 let moves;
+
+function initializeValues() {
+  matches = []
+  scores = 3;
+  moves = 0;
+  moveCounter.textContent = moves
+  document.getElementById("sec").innerHTML = 0;
+  document.querySelector("ul.stars").innerHTML = stars;
+}
 
 function setGame() {
   let cardList = document.querySelectorAll("li.card");
@@ -14,12 +23,7 @@ function setGame() {
     cardList[i].className = "card";
     cardList[i].addEventListener("click", clickHandler);
   }
-  matches = []
-  scores = 3;
-  moves = 0;
-  moveCounter.textContent = moves
-  document.getElementById("sec").innerHTML = 0;
-  document.querySelector("ul.stars").innerHTML = stars;
+  initializeValues()
 }
 
 function shuffle(array) {
@@ -44,13 +48,8 @@ function removeCards() {
   openCards = []
 }
 
-function hasPriorCard() {
-  return openCards.length > 1 ? true : false
-}
-
 function isMatch(card1, card2) {
   return card1.querySelector("i").className === card2.querySelector("i").className ? true : false
-
 }
 
 function handleMatch(card1, card2) {
@@ -68,21 +67,20 @@ function handleMismatch(card1, card2) {
   card2.addEventListener("click", clickHandler)
 }
 
+function displayStars() {
+  let starList = document.querySelector("ul.stars")
+  starList.removeChild(starList.children[0]);
+  let node = document.createElement("li")
+  node.className = "fa fa-star-o";
+}
+
 function updateScore() {
   if (scores === 3 && moves > 12) {
     scores -= 1
-    let starList = document.querySelector("ul.stars")
-    starList.removeChild(starList.children[0]);
-    let node = document.createElement("li")
-    node.className = "fa fa-star-o";
-    document.querySelector(".stars").appendChild(node);
+    displayStars()
   } else if (scores === 2 && moves > 16) {
     scores -= 1
-    let starList = document.querySelector("ul.stars")
-    starList.removeChild(starList.children[0]);
-    let node = document.createElement("li")
-    node.className = "fa fa-star-o";
-    document.querySelector("ul.stars").appendChild(node);
+    displayStars()
   }
 }
 
