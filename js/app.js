@@ -1,6 +1,4 @@
-
-// const cardTypes = ["paper-plane-o", "diamond", "anchor", "bolt", "cube", "leaf", "bicycle", "bomb"];
-let moveCounter = document.querySelector("div.move-counter")
+let moveCounter = document.getElementById("moves")
 let scores;
 let openCards = [];
 let matches = [];
@@ -15,12 +13,11 @@ function setGame() {
     cardList[i].className = "card";
     cardList[i].addEventListener("click", clickHandler);
   }
+  matches = []
   scores = 3;
   moves = 0;
-  document.getElementById("timer").innerHTML = 0;
-  matches = []
-
   moveCounter.textContent = moves
+  document.getElementById("sec").innerHTML = 00;
 }
 
 function shuffle(array) {
@@ -47,8 +44,21 @@ function hasPriorCard() {
   return openCards.length > 1 ? true : false
 }
 
-function handleMatch() {
-  // lock two open cards that match
+function handleMatch(card1, card2) {
+  card1.classList.add("match")
+  card2.classList.add("match")
+  card1.removeEventListener("click", clickHandler)
+  card2.removeEventListener("click", clickHandler)
+  removeCards();
+  matches.push(card1, card2)
+}
+
+function handleMismatch(card1, card2) {
+  removeCards();
+  setTimeout(function() {card1.classList.remove("open", "show")}, 1000)
+  setTimeout(function() {card2.classList.remove("open", "show")}, 1000)
+  card1.addEventListener("click", clickHandler)
+  card2.addEventListener("click", clickHandler)
 }
 
 function updateScore() {
@@ -85,21 +95,9 @@ function clickHandler() {
   if (hasPriorCard()) {
     let previousCard = openCards[openCards.length - 2];
     if (previousCard.querySelector("i").className === icon.className) {
-      this.classList.add("match")
-      previousCard.classList.add("match")
-
-      this.removeEventListener("click", clickHandler)
-      previousCard.removeEventListener("click", clickHandler)
-
-      removeCards();
-      matches.push(this, previousCard)
+      handleMatch(this, previousCard)
     } else {
-      removeCards();
-      setTimeout(function() {previousCard.classList.remove("open", "show")}, 1000)
-      let card = this
-      setTimeout(function() {card.classList.remove("open", "show")}, 1000)
-      card.addEventListener("click", clickHandler)
-      previousCard.addEventListener("click", clickHandler)
+      handleMismatch(this, previousCard)
     }
     moves += 1;
     moveCounter.textContent = moves
@@ -108,21 +106,8 @@ function clickHandler() {
     if (gameOver()) {
       stop()
       setTimeout(openModal, 1000)
-    }// check if game is over
+    }
   }
-
-
-  /*
-   * set up the event listener for a card. If a card is clicked:
-   *  - display the card's symbol (put this functionality in another function that you call from this one)
-   *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
-   *  - if the list already has another card, check to see if the two cards match
-   *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
-   *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
-   *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
-   *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
-   */
-
 }
 
 let modal = document.getElementById("simpleModal");
@@ -161,24 +146,21 @@ function clickOutside(e) {
 
 window.addEventListener("click", clickOutside)
 
-
 // game timer
-
-
 let timerInterval = null;
+let value;
 
 function start() {
-  let value = 0;
+  value = 0;
   stop(); // stoping the previous counting (if any)
   timerInterval = setInterval(changeValue, 1000);
-
-  function changeValue() {
-    console.log("I've been fired");
-    console.log(value);
-    document.getElementById("timer").innerHTML = ++value;
-  }
-
 }
+
+function changeValue() {
+  value = parseFloat(value)
+  document.getElementById("sec").innerHTML = ++value;
+}
+
 let stop = function() {
   clearInterval(timerInterval);
 }
