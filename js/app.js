@@ -182,3 +182,5 @@ function changeValue() {
 let stop = function() {
   clearInterval(timerInterval);
 }
+// set game to initial state on loading
+window.onload=setGame();
