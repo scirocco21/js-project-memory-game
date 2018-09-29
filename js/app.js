@@ -77,6 +77,7 @@ function updateStars() {
   starList.removeChild(starList.children[0]);
   let node = document.createElement("li");
   node.className = "fa fa-star-o";
+  starList.appendChild(node);
 }
 
 function updateMoves() {
@@ -87,7 +88,7 @@ function updateMoves() {
 function updateScore() {
   if (scores === 3 && moves > 12) {
     scores -= 1;
-    displayStars();
+    updateStars();
   } else if (scores === 2 && moves > 16) {
     scores -= 1;
     updateStars();
@@ -141,6 +142,8 @@ restartBtn.addEventListener('click', function(){
 closeBtn.addEventListener('click', closeModal);
 
 // enable modal at the end of each game
+modal = document.querySelector(".modal")
+
 function openModal() {
   let summary = document.getElementById("summary");
   let seconds = document.getElementById("sec");
@@ -173,7 +176,6 @@ function start() {
 }
 
 function changeValue() {
-  value = parseFloat(value);
   document.getElementById("sec").innerHTML = ++value;
 }
 
