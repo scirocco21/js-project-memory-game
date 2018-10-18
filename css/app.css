@@ -49,7 +49,7 @@ h1 {
     justify-content: space-between;
     align-items: center;
     margin: 0 0 3em;
-      perspective:800px;
+    perspective:800px;
 }
 
 .deck .card {
@@ -91,7 +91,8 @@ h1 {
 .score-panel {
     text-align: left;
     width: 345px;
-    margin-bottom: 10px;
+    margin-bottom: 10px
+
 }
 
 .score-panel .stars {
@@ -109,6 +110,21 @@ h1 {
 .score-panel .restart {
     float: right;
     cursor: pointer;
+}
+
+div.move-counter {
+    display: inline;
+    margin: 0 10px;
+}
+
+div.time-keeper {
+  display: inline;
+  margin: 0 10px;
+}
+
+div.scores {
+  display: inline;
+  margin: 0 10px;
 }
 
 /* modal styles */
