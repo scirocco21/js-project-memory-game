@@ -147,8 +147,8 @@ modal = document.querySelector(".modal")
 function openModal() {
   let summary = document.getElementById("summary");
   let seconds = document.getElementById("sec");
-  let scores = document.querySelectorAll("ul.stars li i");
-  summary.innerHTML = `Your score was ${scores.length} and you took ${seconds.textContent} seconds`;
+  let scores = document.querySelectorAll("ul.stars li i").length;
+  summary.innerHTML = "Your score was " + '<em>' + scores + '</em>' + " and you took " + "<em>" + `${seconds.textContent}` + "</em>" + " seconds to finish the game.";
   modal.style.display = "block";
 }
 
