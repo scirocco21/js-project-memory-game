@@ -186,3 +186,9 @@ span#closeBtn {
   text-decoration: none;
   cursor: pointer;
 }
+
+h1.voynich {
+  font-family: 'Voynich123'; 
+  font-weight: normal; 
+  font-style: normal; 
+}
