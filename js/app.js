@@ -51,7 +51,7 @@ function removeCards() {
 
 // determine whether two cards are a match
 function isMatch(card1, card2) {
-  return card1.querySelector("i").className === card2.querySelector("i").className ? true : false;
+  return card1.innerHTML === card2.innerHTML? true : false;
 }
 
 // if so, change their styling and remove event listener
