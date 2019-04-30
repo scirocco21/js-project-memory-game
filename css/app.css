@@ -17,8 +17,9 @@ body {
 }
 
 body {
-    background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
-    font-family: 'Coda', cursive;
+    background: #423D7B url('../img/type.png'); /* Background pattern from Subtle Patterns */
+    font-family: 'Tangerine';
+    letter-spacing: 2px;
 }
 
 .container {
@@ -28,11 +29,6 @@ body {
     flex-direction: column;
 }
 
-h1 {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 300;
-}
-
 /*
  * Styles for the deck of cards
  */
@@ -40,7 +36,10 @@ h1 {
 .deck {
     width: 660px;
     min-height: 680px;
-    background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
+    background: #FFEFBA;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #FFFFFF, #FFEFBA);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #FFFFFF, #FFEFBA); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    
     padding: 32px;
     border-radius: 10px;
     box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
@@ -64,13 +63,13 @@ h1 {
     justify-content: center;
     align-items: center;
     box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
-    transition: transform 1.5s;
+    transition: transform 1s;
     transform-style:preserve-3d;
 }
 
 .deck .card.open {
     transform: rotateY(180deg);
-    background: #02b3e4;
+    background: #120F40;
     cursor: default;
 }
 
@@ -80,7 +79,7 @@ h1 {
 
 .deck .card.match {
     cursor: default;
-    background: #02ccba;
+    background: #9B488E;
     font-size: 33px;
 }
 
@@ -90,9 +89,12 @@ h1 {
 
 .score-panel {
     text-align: left;
-    width: 345px;
-    margin-bottom: 10px
-
+    width: 380px;
+    margin-bottom: 10px;
+    color: #E1E0EB;
+    font-size: 18px;
+    font-family: 'Fenix';
+    letter-spacing: 1px;
 }
 
 .score-panel .stars {
@@ -187,8 +189,86 @@ span#closeBtn {
   cursor: pointer;
 }
 
-h1.voynich {
+div#overlay {
+  position: fixed; /* Sit on top of the page content */
+  top: 0; 
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.9); /* Black background with opacity */
+  z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+  width: 100%;
+  height: 100%;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+div#overlay-text {
+  font-family: 'Tangerine', cursive;
+  font-weight: bold;
+  text-align: center;
+}
+
+section#instructions {
+  margin-top: 50px;
+}
+
+section#instructions > h2 {
+  font-size: 32px;
+}
+
+h1.lead-text {
+  font-size: 72px;
+  color: #E1E0EB;
+}
+
+section#faq {
+  color: #E1E0EB;
+  margin-top: 40px;
+  text-align: center;
+  font-size: 24px;
+}
+
+section#faq > h2 > a {
+  text-decoration: none;
+  color: white;
+}
+
+section#faq > h2 > a:hover {
+  color: red;
+}
+
+hr.fancy {
+  padding: 0;
+  border: none;
+  border-top: medium double;
+  text-align: center;
+  width: 33%;
+}
+
+.voynich {
   font-family: 'Voynich123'; 
   font-weight: normal; 
   font-style: normal; 
+}
+
+p.voynich {
+  margin-top: 5px;
+}
+
+button#start {
+  background-color: #faebd7;
+  border: none;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 34px;
+  margin-top: 20px;
+  cursor: pointer;
+  font-family: 'Tangerine';
+  font-weight: bold;
 }
