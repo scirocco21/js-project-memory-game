@@ -2,18 +2,36 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Matching Game</title>
+    <title>Voynich Matching Game</title>
     <meta name="description" content="">
     <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
     <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/voynich" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css?family=Tangerine" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Fenix" rel="stylesheet">
+
     <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
+  <div id="overlay">
+    <div id="overlay-text">
 
+      <h1 class="lead-text">Voynich Matching Game</h1>
+      <p class="voynich">dain dain abacabra malathenor eknafsidor almahsiit</p>
+      <section id="instructions"> 
+         <h2>Match the characters from the mysterious Voynich alphabet to win.</h2>
+        <h2>Complete the game with the least number of moves for the highest score.</h2>
+      </section>
+      <button id="start">
+        Start
+      </button>
+    </div>
+   
+  </div>
+    
     <div class="container">
         <header>
-            <h1>Matching Game</h1>
+            <h1 class="lead-text">Voynich Matching Game</h1>
         </header>
 
         <section class="score-panel">
@@ -40,7 +58,7 @@
 
         <ul class="deck">
             <li class="card open show">
-                <h1 class="voynich">a</h1>
+              <h1 class="voynich">a</h1>
             </li>
             <li class="card">
               <h1 class="voynich">b</h1>
@@ -89,6 +107,17 @@
             </li>
         </ul>
     </div>
+    <section id="faq">
+      <h1>FAQs</h1>
+      <hr class="fancy">
+      <h2>1. What are these squiggles?</h2>
+      <h2> - <i>They are characters in an unknown language that may or may not be a cypher text.</i></h2>
+      <h2>2. Who or what is Voynich?</h2>
+      <h2> - Long story...read more about it here: <a href="https://en.wikipedia.org/wiki/Wilfrid_Voynich">Wilfrid Voynich</a></h2>
+      <h2> 3. I won. How do I claim my prize?</h2>
+      <h2> - <span class="voynich">dain dain elogin aftahan<span></span></h2>
+    </section>
+     
 
     <div id="simpleModal" class="modal">
       <div class="modal-content">
