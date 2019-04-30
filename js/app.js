@@ -3,6 +3,15 @@ let stars = document.querySelector("ul.stars").innerHTML
 let scores, matches, moves;
 let openCards = [];
 
+// set up button that will let users access game
+let startBtn = document.getElementById("start");
+startBtn.addEventListener('click', hideOverlay);
+
+function hideOverlay() {
+  let overlay = document.getElementById("overlay");
+  overlay.style.display = "none";
+}
+
 // set starting values for each game
 function initializeValues() {
   matches = [];
@@ -51,7 +60,7 @@ function removeCards() {
 
 // determine whether two cards are a match
 function isMatch(card1, card2) {
-  return card1.innerHTML === card2.innerHTML? true : false;
+  return card1.innerText == card2.innerText? true : false;
 }
 
 // if so, change their styling and remove event listener
