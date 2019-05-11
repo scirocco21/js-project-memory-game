@@ -272,3 +272,13 @@ button#start {
   font-family: 'Tangerine';
   font-weight: bold;
 }
+
+#summary {
+  font-size: 24px;
+}
+
+#repeat {
+  border-radius: 5px;
+  font-family: 'Fenix', bold;
+  font-size: 28px;
+}
